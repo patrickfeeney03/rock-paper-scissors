@@ -24,7 +24,7 @@ function getPlayerChoice() {
         if (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors") {
             alert("Input is not correct. Please try again.");
             userChoice = prompt("Choose between Rock, Paper, or Scissors.");
-        userChoice = userChoice.toLowerCase();
+            userChoice = userChoice.toLowerCase();
         }        
     } while (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors")
     
@@ -35,39 +35,70 @@ function playRound(playerSelection, computerSelection) {
     let roundResult;
     if (playerSelection === "rock") {
         if (computerSelection === "rock") {
-            roundResult = "Draw!";
+            roundResult = "draw";
         }
         if (computerSelection === "paper") {
-            roundResult = "You Lose! Paper beats Rock";
+            roundResult = "computer";
         }
         if (computerSelection === "scissors") {
-            roundResult = "You Win! Rock beats Scissors";
+            roundResult = "player";
         }
     }
     else if (playerSelection === "paper") {
         if (computerSelection === "rock") {
-            roundResult = "You Win! Paper beats Rock";
+            roundResult = "player";
         }
         if (computerSelection === "paper") {
-            roundResult = "Draw";            
+            roundResult = "draw";            
         }
         if (computerSelection === "scissors") {
-            roundResult = "You Lose! Scissors beat Paper";
+            roundResult = "computer";
         }
     }
     else if (playerSelection === "scissors") {
         if (computerSelection === "rock") {
-            roundResult = "You Lose! Rock beats Scissors";
+            roundResult = "computer";
         }
         if (computerSelection === "paper") {
-            roundResult = "You Win! Scissors beat Paper";
+            roundResult = "player";
         }
         if (computerSelection === "scissors") {
-            roundResult = "Draw";
+            roundResult = "draw";
         }
     }
     return roundResult;
 }
 
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
+function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1)
+}
 
+function game() {
+    let playerCount = 0;
+    let computerCount = 0;
+
+    for (let i = 0; i < 5; i++) {
+        // Display results of each round
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+        let roundResult = playRound(playerChoice, computerChoice);
+
+        if (roundResult === "draw") {
+            console.log("Draw");
+        } else if (roundResult === "player") {
+            console.log(`${capitalizeFirstLetter(playerChoice)} Beats ${capitalizeFirstLetter(computerChoice)}`);
+            playerCount++;
+        } else if (roundResult === "computer") {
+            console.log(`${capitalizeFirstLetter(computerChoice)} Beats ${capitalizeFirstLetter(playerChoice)}`);
+            computerCount++;
+        }
+        
+    }
+    if (playerCount == computerCount) console.log("\nDraw! Nobody Wins");
+    else if (playerCount > computerCount) console.log("\Player Wins!");
+    else console.log("\nComputer Wins");
+
+    // Display winner at the
+}
+
+game();

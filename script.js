@@ -16,3 +16,10 @@ function getComputerChoice() {
     }
     return computerChoice;
 }
+
+function getPlayerChoice() {
+    let userChoice = prompt("Choose between Rock, Paper, or Scissors.");
+    userChoice = userChoice.toLowerCase();
+    return userChoice;
+}
+

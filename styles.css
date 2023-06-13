@@ -1,0 +1,22 @@
+* {
+    border: 2px solid pink;
+    margin: 1px;
+}
+
+.title {
+    text-align: center;
+    font-size: 45px;
+}
+
+.images-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 2px solid red;
+    justify-content: center;
+}
+.main-images {
+    width: 250px;
+    height: auto;
+    margin: 5px;
+}

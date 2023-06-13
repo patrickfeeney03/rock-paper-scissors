@@ -15,7 +15,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-    border: 2px solid red;
+    //border: 2px solid red;
     justify-content: center;
 }
 .main-images {
@@ -37,4 +37,12 @@ body {
 
 .choice-container {
     border: solid black 3px;
+    width: 200px;
+    height: 200px;
+}
+
+
+.choice-images {
+    width: 200px;
+    display: none;
 }

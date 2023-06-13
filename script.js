@@ -17,26 +17,6 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function getPlayerChoice() {
-    let userChoice = prompt("Choose between Rock, Paper, or Scissors.");
-    if (!userChoice) {
-        return;
-    }
-    userChoice = userChoice.toLowerCase();
-    do {
-        if (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors") {
-            alert("Input is not correct. Please try again.");
-            userChoice = prompt("Choose between Rock, Paper, or Scissors.");
-            if (!userChoice) {
-                return;
-            }
-            userChoice = userChoice.toLowerCase();
-        }        
-    } while (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors")
-    
-    return userChoice;
-}
-
 function playRound(playerSelection, computerSelection) {
     let roundResult;
     if (playerSelection === "rock") {
@@ -78,10 +58,11 @@ function playRound(playerSelection, computerSelection) {
 function capitalizeFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1)
 }
-
-function game() {
-    let playerCount = 0;
-    let computerCount = 0;
+let playerCount = 0;
+let computerCount = 0;
+let roundCount = 0;
+function game1() {
+    
 
     for (let i = 0; i < 5; i++) {
         // Display results of each round
@@ -107,4 +88,62 @@ function game() {
     // Display winner at the
 }
 
-//game();
+function userTurn() {
+    let title = document.querySelector(".title");
+    title.textContent = "User's Turn!";
+}
+
+function computerTurn() {
+    let title = document.querySelector(".title");
+    title.textContent = "Computer's Turn!";
+}
+
+function imageClicked() {
+    // Gets the id of the image that causes the function to get called
+    let choice = this.id;
+    removeUserEventListener();
+    let computerChoice = getComputerChoice();
+    console.log(`User Choice: ${choice}, Computer Choice: ${computerChoice}`);
+    let roundResult = playRound(choice, computerChoice);
+    if (roundResult === "player") {
+        playerCount++;
+    } else if (roundResult === "computer") {
+        computerCount++;
+    }
+    console.log(`Round Winner: ${roundResult}`);
+
+    roundCount++;
+    if (roundCount > 4) {
+        if(playerCount === computerCount) {
+            console.log("Draw");
+        } else if(playerCount < computerCount) {
+            console.log("Computer Wins");
+        } else {
+            console.log("Player Wins");
+        }
+    } else {
+        setUserEventListener();
+    }
+    
+    
+    
+}
+function setUserEventListener() {
+    // Main images code
+    const images = document.querySelectorAll(".main-images");
+    images.forEach(image => image.addEventListener("click", imageClicked));   
+}
+function removeUserEventListener() {
+    const images = document.querySelectorAll(".main-images");
+    images.forEach(image => image.removeEventListener("click", imageClicked));
+}
+let userInput = false;
+
+function game() {
+    let userChoice = "";
+    userTurn();
+    setUserEventListener();
+}
+
+
+game();

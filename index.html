@@ -5,23 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="./script.js"></script>
+    
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <div>
-        <p class="title">Someone's turn!</p>
+        <p class="title">Your turn!</p>
     </div>
 
     <div class="images-container">
-        <div id="rock">
-            <img src="./images/rock.svg" class="main-images">
+        <div>
+            <img src="./images/rock.svg" class="main-images" id="rock">
         </div>
-        <div id="paper">
-            <img src="./images/paper.svg" class="main-images">
+        <div>
+            <img src="./images/paper.svg" class="main-images" id="paper">
         </div>
-        <div id="scissors">
-            <img src="./images/scissors.svg" class="main-images">
+        <div>
+            <img src="./images/scissors.svg" class="main-images" id="scissors">
         </div>
     </div>
 
@@ -31,7 +31,7 @@
                 <p>You</p>
             </div>
             <div class="choice-container">
-                <img src="./images/rock.svg" class="main-images">
+                <img src="./images/rock.svg">
             </div>
             <div>
                 <p>0</p>
@@ -45,7 +45,7 @@
                 <p>Computer</p>
             </div>
             <div class="choice-container">
-                <img src="./images/rock.svg" class="main-images">
+                <img src="./images/rock.svg">
             </div>
             <div>
                 <p>4</p>
@@ -59,4 +59,5 @@
     </div>
     
 </body>
+<script src="./script.js"></script>
 </html>

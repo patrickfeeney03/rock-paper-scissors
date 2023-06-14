@@ -64,6 +64,7 @@ let computerCount = 0;
 let roundCount = 0;
 
 function imageClicked() {
+    updateRoundCounter(roundCount+2);
     // Gets the id of the image that causes the function to get called
     let choice = this.id;
     
@@ -211,6 +212,11 @@ function restartGame() {
 function setButtonEventListener() {
     let buttonElement = document.querySelector("#play-again");
     buttonElement.addEventListener("click", restartGame);
+}
+
+function updateRoundCounter(roundNumber) {
+    let spanElement = document.querySelector("#round-count");
+    spanElement.textContent = roundNumber;
 }
 
 setButtonEventListener();

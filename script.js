@@ -199,13 +199,19 @@ function togglePlayAgainButton() {
     }
 }
 
+function toggleCounter() {
+    
+}
+
 function restartGame() {
     toggleMainImages();
     togglePlayAgainButton();
+    
     playerCount = 0;
     computerCount = 0;
-    roundCount = 0;
+    roundCount = 1;
     console.log("Restarting game");
+    updateRoundCounter(roundCount);
     game();
 }
 
@@ -216,6 +222,10 @@ function setButtonEventListener() {
 
 function updateRoundCounter(roundNumber) {
     let spanElement = document.querySelector("#round-count");
+    const MAX_COUNT = 5; // To prevent the round text going over 5.
+    if (roundNumber > MAX_COUNT) {
+        return
+    }
     spanElement.textContent = roundNumber;
 }
 

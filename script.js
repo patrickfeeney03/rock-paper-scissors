@@ -107,6 +107,8 @@ function imageClicked() {
     roundCount++;
     // Game ends after 5 rounds
     if (roundCount > 4) {
+        toggleMainImages();
+        togglePlayAgainButton();
         if(playerCount === computerCount) {
             console.log("Draw");
             let playerResult = document.querySelector("#player-result");
@@ -196,5 +198,20 @@ function togglePlayAgainButton() {
     }
 }
 
+function restartGame() {
+    toggleMainImages();
+    togglePlayAgainButton();
+    playerCount = 0;
+    computerCount = 0;
+    roundCount = 0;
+    console.log("Restarting game");
+    game();
+}
 
+function setButtonEventListener() {
+    let buttonElement = document.querySelector("#play-again");
+    buttonElement.addEventListener("click", restartGame);
+}
+
+setButtonEventListener();
 game();

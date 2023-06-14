@@ -63,7 +63,34 @@ let playerCount = 0;
 let computerCount = 0;
 let roundCount = 0;
 
+function addBounceSquaresClass() {
+    function addClass() {
+        let squares = document.querySelectorAll(".choice-container");
+        squares.forEach((square) => {
+            square.classList.add("bounce");
+            console.log("Adding class");
+        });
+    }
+
+    function removeClass() {
+        let squares = document.querySelectorAll(".choice-container");
+        squares.forEach((square) => {
+            console.log("Once");
+            // Remove the class once it finished animating!
+            square.addEventListener("animationend", function handler() {
+                square.classList.remove("bounce");
+                console.log("Removing class");
+                square.removeEventListener("animationend", handler);
+            });
+        });  
+    }
+
+    addClass();
+    removeClass();      
+}
+
 function imageClicked() {
+    addBounceSquaresClass();
     updateRoundCounter(roundCount+2);
     // Gets the id of the image that causes the function to get called
     let choice = this.id;
@@ -91,17 +118,12 @@ function imageClicked() {
         square2.src="./images/scissors.svg";
     }
 
-
     console.log(`User Choice: ${choice}, Computer Choice: ${computerChoice}`);
     let roundResult = playRound(choice, computerChoice);
     if (roundResult === "player") {
-        playerCount++;
-        let playerScore = document.querySelector("#player-score");
-        playerScore.textContent = playerCount;
+        updateUserCounter(++playerCount);
     } else if (roundResult === "computer") {
-        computerCount++;
-        let computerScore = document.querySelector("#computer-score");
-        computerScore.textContent = computerCount;
+        updateComputerCounter(++computerCount);
     }
     console.log(`Round Winner: ${roundResult}`);
 

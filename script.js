@@ -204,14 +204,13 @@ function toggleCounter() {
 }
 
 function restartGame() {
-    toggleMainImages();
-    togglePlayAgainButton();
-    
     playerCount = 0;
     computerCount = 0;
     roundCount = 1;
     console.log("Restarting game");
     updateRoundCounter(roundCount);
+    toggleMainImages();
+    togglePlayAgainButton();
     game();
 }
 
@@ -227,6 +226,16 @@ function updateRoundCounter(roundNumber) {
         return
     }
     spanElement.textContent = roundNumber;
+}
+
+function updateUserCounter(userScore) {
+    let spanElement = document.querySelector("#player-score");
+    spanElement.textContent = userScore;
+}
+
+function updateComputerCounter(computerScore) {
+    let spanElement = document.querySelector("#computer-score");
+    spanElement.textContent = computerScore;
 }
 
 setButtonEventListener();

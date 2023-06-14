@@ -58,45 +58,10 @@ function playRound(playerSelection, computerSelection) {
 function capitalizeFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1)
 }
+// Variables used to keep track of the scores and rounds
 let playerCount = 0;
 let computerCount = 0;
 let roundCount = 0;
-function game1() {
-    
-
-    for (let i = 0; i < 5; i++) {
-        // Display results of each round
-        let playerChoice = getPlayerChoice();
-        let computerChoice = getComputerChoice();
-        let roundResult = playRound(playerChoice, computerChoice);
-
-        if (roundResult === "draw") {
-            console.log("Draw");
-        } else if (roundResult === "player") {
-            console.log(`${capitalizeFirstLetter(playerChoice)} Beats ${capitalizeFirstLetter(computerChoice)}`);
-            playerCount++;
-        } else if (roundResult === "computer") {
-            console.log(`${capitalizeFirstLetter(computerChoice)} Beats ${capitalizeFirstLetter(playerChoice)}`);
-            computerCount++;
-        }
-        
-    }
-    if (playerCount == computerCount) console.log("\nDraw! Nobody Wins");
-    else if (playerCount > computerCount) console.log("\Player Wins!");
-    else console.log("\nComputer Wins");
-
-    // Display winner at the
-}
-
-function userTurn() {
-    let title = document.querySelector(".title");
-    title.textContent = "User's Turn!";
-}
-
-function computerTurn() {
-    let title = document.querySelector(".title");
-    title.textContent = "Computer's Turn!";
-}
 
 function imageClicked() {
     // Gets the id of the image that causes the function to get called
@@ -113,7 +78,6 @@ function imageClicked() {
         square1.src="./images/scissors.svg";
     }
     removeUserEventListener();
-    computerTurn();
     let computerChoice = getComputerChoice();
 
     let square2 = document.querySelector("#img-sqr-2");
@@ -126,7 +90,6 @@ function imageClicked() {
         square2.src="./images/scissors.svg";
     }
 
-    userTurn();
 
     console.log(`User Choice: ${choice}, Computer Choice: ${computerChoice}`);
     let roundResult = playRound(choice, computerChoice);
@@ -186,8 +149,8 @@ function removeUserEventListener() {
 let userInput = false;
 
 function game() {
+    
     let userChoice = "";
-    userTurn();
     setUserEventListener();
 
     // Hide Win/Lost titles at the beginning of the game
@@ -196,6 +159,29 @@ function game() {
     let computerResult = document.querySelector("#computer-result");
     computerResult.style.display = "none";
 }
+
+function toggleMainImages() {
+    let mainImages = document.querySelectorAll(".main-images");
+    let displayType = window.getComputedStyle(mainImages[0]).getPropertyValue("display");
+    if (displayType === "inline") {
+        console.log("Setting display to none");
+        mainImages.forEach((image) => {
+            image.style.display = "none";
+        });
+    } else if (displayType === "none") {
+        console.log("Setting display to inline");
+        mainImages.forEach((image) => {
+            image.style.display = "inline";
+        });
+    } else {
+        console.log("Something isn't right. Setting display to inline");
+        mainImages.forEach((image) => {
+            image.style.display = "inline";
+        })
+    }
+}
+
+// function togglePlayAgainButton()
 
 
 game();

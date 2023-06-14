@@ -22,6 +22,12 @@ body {
     width: 250px;
     height: auto;
     margin: 5px;
+    
+}
+
+#play-again {
+    display: none;
+    font-size: 50px;
 }
 
 .win-loose {

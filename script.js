@@ -174,14 +174,27 @@ function toggleMainImages() {
             image.style.display = "inline";
         });
     } else {
-        console.log("Something isn't right. Setting display to inline");
+        console.log("Something isn't right. Setting display property of images to inline");
         mainImages.forEach((image) => {
             image.style.display = "inline";
         })
     }
 }
 
-// function togglePlayAgainButton()
+function togglePlayAgainButton() {
+    let playAgainButton = document.querySelector("#play-again");
+    let displayType = window.getComputedStyle(playAgainButton).getPropertyValue("display");
+    if (displayType === "inline-block") {
+        console.log("Setting display to none");
+        playAgainButton.style.display = "none";
+    } else if (displayType === "none") {
+        console.log("Setting display to inline");
+        playAgainButton.style.display = "inline";
+    } else {
+        console.log("Something isn't right. Setting display property of button to inline");
+        playAgainButton.style.display = "inline";
+    }
+}
 
 
 game();

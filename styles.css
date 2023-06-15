@@ -1,7 +1,7 @@
-* {
-    //border: 2px solid pink;
-    //margin: 1px;
-}
+/* * {
+    border: 2px solid pink;
+    //margin: 1px; 
+}*/
 
 body {
     text-align: center;
@@ -33,10 +33,11 @@ body {
     height: auto;
     margin: 5px;
     cursor: pointer;
+    display: none;
 }
 
 #play-again {
-    display: none;
+    display: inline;
     cursor: pointer;
     font-size: 50px;
     padding: 30px;
@@ -74,9 +75,6 @@ body {
         scale: 1.02;
     }
 }
-
-
-
 
 .choice-images {
     width: 200px;

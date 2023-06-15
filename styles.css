@@ -61,23 +61,78 @@ body {
     height: 200px;
 }
 
-.bounce {
-    animation-duration: 0.1s;
-    animation-name: myBounce;
-}
-
-@keyframes myBounce {
-    from {
-        scale: 1;
-    }
-
-    to {
-        scale: 1.02;
-    }
-}
-
 .choice-images {
     width: 200px;
     display: none;
 }
 
+.bounce-and-green-shadow {
+    animation-duration: 0.3s;
+    animation-name: myBounce, myShadowGreen;
+}
+
+.bounce-and-red-shadow {
+    animation-duration: 0.3s;
+    animation-name: myBounce, myShadowRed;
+}
+
+.bounce-and-yellow-shadow {
+    animation-duration: 0.3s;
+    animation-name: myBounce, myShadowYellow;
+}
+
+@keyframes myBounce {
+    0% {
+        scale: 1;
+    }
+
+    65% {
+        scale: 1.01;
+    }
+
+    100% {
+        scale: 1;
+    }
+}
+
+@keyframes myShadowGreen {
+    0% {
+        box-shadow: 0 0 0px 0px greenyellow;
+    }
+
+    65% {
+        box-shadow: 0 0 13px 12px greenyellow;
+    }
+
+    100% {
+        box-shadow: 0 0 0px 0px greenyellow;
+    }
+}
+
+@keyframes myShadowRed {
+    0% {
+        box-shadow: 0 0 0px 0px red;
+    }
+
+    65% {
+        box-shadow: 0 0 13px 12px red;
+    }
+
+    100% {
+        box-shadow: 0 0 0px 0px red;
+    }
+}
+
+@keyframes myShadowYellow {
+    0% {
+        box-shadow: 0 0 0px 0px yellow;
+    }
+
+    65% {
+        box-shadow: 0 0 13px 12px yellow;
+    }
+
+    100% {
+        box-shadow: 0 0 0px 0px yellow;
+    }
+}

@@ -53,40 +53,36 @@ function getRoundWinner(playerSelection, computerSelection) {
     return roundResult;
 }
 
-function bounceChoiceContainers() {
-    function addBounceClass() {
-        let squares = document.querySelectorAll(".choice-container");
-        squares.forEach((square) => {
-            square.classList.add("bounce");
-        });
-    }
+function addAnimationToElement(elementId, animationName) {
+    let element = document.querySelector(elementId);
+    element.classList.remove(animationName);
+    void element.offsetWidth;
+    element.classList.add(animationName);
 
-    function removeBounceClass() {
-        let squares = document.querySelectorAll(".choice-container");
-        squares.forEach((square) => {
-            square.addEventListener("animationend", function handler() {
-                square.classList.remove("bounce");
-                square.removeEventListener("animationend", handler);
-            });
-        });  
-    }
-
-    addBounceClass();
-    removeBounceClass();
+    element.addEventListener("animationend", function handler() {
+        element.classList.remove(animationName);
+        element.removeEventListener("animationend", handler);
+    });
 }
 
 function runRound() {
-    bounceChoiceContainers();
-    
     let playerChoice = this.id;
     let computerChoice = getComputerChoice();
     setChoiceContainersWithChoices(playerChoice, computerChoice);
     let roundWinner = getRoundWinner(playerChoice, computerChoice);
     console.log(`User Choice: ${playerChoice}\nComputer Choice: ${computerChoice}\nRound Winner: ${roundWinner}`);
+    
     if (roundWinner === "player") {
         updatePlayerCounter(++playerWinsCount);
+        addAnimationToElement("#square-container1", "bounce-and-green-shadow");
+        addAnimationToElement("#square-container2", "bounce-and-red-shadow");
     } else if (roundWinner === "computer") {
         updateComputerCounter(++computerWinsCount);
+        addAnimationToElement("#square-container1", "bounce-and-red-shadow");
+        addAnimationToElement("#square-container2", "bounce-and-green-shadow");
+    } else {
+        addAnimationToElement("#square-container1", "bounce-and-yellow-shadow");
+        addAnimationToElement("#square-container2", "bounce-and-yellow-shadow");
     }
     roundCount++;
     

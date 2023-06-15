@@ -1,3 +1,8 @@
+// Global Variables used to keep track of game easily
+let playerCount = 0;
+let computerCount = 0;
+let roundCount = 0;
+
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3 + 1)
     let computerChoice;
@@ -55,20 +60,13 @@ function playRound(playerSelection, computerSelection) {
     return roundResult;
 }
 
-function capitalizeFirstLetter(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1)
-}
-// Variables used to keep track of the scores and rounds
-let playerCount = 0;
-let computerCount = 0;
-let roundCount = 0;
 
-function addBounceSquaresClass() {
+
+function addBounceSquaresClass() { // Rename to bounceChoiceSquares
     function addClass() {
         let squares = document.querySelectorAll(".choice-container");
         squares.forEach((square) => {
             square.classList.add("bounce");
-            console.log("Adding class");
         });
     }
 
@@ -79,7 +77,6 @@ function addBounceSquaresClass() {
             // Remove the class once it finished animating!
             square.addEventListener("animationend", function handler() {
                 square.classList.remove("bounce");
-                console.log("Removing class");
                 square.removeEventListener("animationend", handler);
             });
         });  
@@ -90,33 +87,14 @@ function addBounceSquaresClass() {
 }
 
 function imageClicked() {
-    addBounceSquaresClass();
-    updateRoundCounter(roundCount+2);
-    // Gets the id of the image that causes the function to get called
-    let choice = this.id;
-    
-    // use the id to populate the first div and show changing display type from none to block
-    let square1 = document.querySelector("#img-sqr-1");
-    square1.style.display = "block";
-    if (choice === "paper") {
-        square1.src="./images/paper.svg";
-    } else if (choice === "rock") {
-        square1.src="./images/rock.svg";
-    } else {
-        square1.src="./images/scissors.svg";
-    }
     removeUserEventListener();
+    addBounceSquaresClass(); // Run bouncing animation on choices
+    
+    // Player and Computer round choices
+    let choice = this.id;
     let computerChoice = getComputerChoice();
-
-    let square2 = document.querySelector("#img-sqr-2");
-    square2.style.display = "block";
-    if (computerChoice === "paper") {
-        square2.src="./images/paper.svg";
-    } else if (computerChoice === "rock") {
-        square2.src="./images/rock.svg";
-    } else {
-        square2.src="./images/scissors.svg";
-    }
+    // This function will populate and update both choice squares
+    setSquaresContentWithPlayerAndComputerChoices(choice, computerChoice);
 
     console.log(`User Choice: ${choice}, Computer Choice: ${computerChoice}`);
     let roundResult = playRound(choice, computerChoice);
@@ -128,11 +106,14 @@ function imageClicked() {
     console.log(`Round Winner: ${roundResult}`);
 
     roundCount++;
-    // Game ends after 5 rounds
+    
     if (roundCount > 4) {
+        // The 3 images will disappear and the play again button will pop up instead of them.
         toggleMainImages();
         togglePlayAgainButton();
+
         if(playerCount === computerCount) {
+            // Game Result: Draw
             console.log("Draw");
             let playerResult = document.querySelector("#player-result");
             let computerResult = document.querySelector("#computer-result");
@@ -141,6 +122,7 @@ function imageClicked() {
             playerResult.style.display = "block";
             computerResult.style.display = "block";
         } else if(playerCount < computerCount) {
+            // Game Result: Computer Wins
             console.log("Computer Wins");
             let playerResult = document.querySelector("#player-result");
             let computerResult = document.querySelector("#computer-result");
@@ -149,6 +131,7 @@ function imageClicked() {
             playerResult.style.display = "block";
             computerResult.style.display = "block";
         } else {
+            // Game Result: Player Wins
             console.log("Player Wins");
             let playerResult = document.querySelector("#player-result");
             let computerResult = document.querySelector("#computer-result");
@@ -158,27 +141,47 @@ function imageClicked() {
             computerResult.style.display = "block";
         }
     } else {
+        // roundCount is not higher than 4 yet, so the game continues
         setUserEventListener();
+        updateRoundCounter(roundCount+1);
     }
 }
 
-function setUserEventListener() {
-    // Main images code
-    const images = document.querySelectorAll(".main-images");
-    images.forEach(image => image.addEventListener("click", imageClicked));   
+function setSquaresContentWithPlayerAndComputerChoices(choice, computerChoice) {
+    let square1 = document.querySelector("#img-sqr-1");
+    square1.style.display = "block";    
+    if (choice === "paper") {
+        square1.src="./images/paper.svg";
+    } else if (choice === "rock") {
+        square1.src="./images/rock.svg";
+    } else {
+        square1.src="./images/scissors.svg";
+    }
+    let square2 = document.querySelector("#img-sqr-2");
+    square2.style.display = "block";
+    if (computerChoice === "paper") {
+        square2.src="./images/paper.svg";
+    } else if (computerChoice === "rock") {
+        square2.src="./images/rock.svg";
+    } else {
+        square2.src="./images/scissors.svg";
+    }
 }
-function removeUserEventListener() {
-    const images = document.querySelectorAll(".main-images");
-    images.forEach(image => image.removeEventListener("click", imageClicked));
+
+function emptyChoiceSquares() {
+    let squares = document.querySelectorAll(".choice-images");
+    squares.forEach((square) => {
+        square.style.display = "none";
+    })
 }
-let userInput = false;
 
-function game() {
-    
-    let userChoice = "";
-    setUserEventListener();
+function game() { // Change this to gameSetup?
+    hidePlayersResultText(); // Hide Win/Lost titles at the beginning of the game
+    setUserEventListener(); // Listen for player's clicks
+    setButtonEventListener(); // Listen for Play Again button click
+}
 
-    // Hide Win/Lost titles at the beginning of the game
+function hidePlayersResultText() {
     let playerResult = document.querySelector("#player-result");
     playerResult.style.display = "none";
     let computerResult = document.querySelector("#computer-result");
@@ -221,44 +224,47 @@ function togglePlayAgainButton() {
     }
 }
 
-function toggleCounter() {
-    
-}
-
 function restartGame() {
     playerCount = 0;
     computerCount = 0;
-    roundCount = 1;
+    roundCount = 0;
     console.log("Restarting game");
-    updateRoundCounter(roundCount);
+    updateRoundCounter(roundCount+1);
+    updateUserCounter(playerCount);
+    updateComputerCounter(computerCount);
     toggleMainImages();
     togglePlayAgainButton();
+    emptyChoiceSquares();
     game();
 }
 
+// Event Listeners
 function setButtonEventListener() {
     let buttonElement = document.querySelector("#play-again");
     buttonElement.addEventListener("click", restartGame);
 }
-
-function updateRoundCounter(roundNumber) {
-    let spanElement = document.querySelector("#round-count");
-    const MAX_COUNT = 5; // To prevent the round text going over 5.
-    if (roundNumber > MAX_COUNT) {
-        return
-    }
-    spanElement.textContent = roundNumber;
+function setUserEventListener() {
+    const images = document.querySelectorAll(".main-images");
+    images.forEach(image => image.addEventListener("click", imageClicked));   
+}
+function removeUserEventListener() {
+    const images = document.querySelectorAll(".main-images");
+    images.forEach(image => image.removeEventListener("click", imageClicked));
 }
 
+
+// Counters functions
+function updateRoundCounter(roundNumber) {
+    let spanElement = document.querySelector("#round-count");
+    spanElement.textContent = roundNumber;
+}
 function updateUserCounter(userScore) {
     let spanElement = document.querySelector("#player-score");
     spanElement.textContent = userScore;
 }
-
 function updateComputerCounter(computerScore) {
     let spanElement = document.querySelector("#computer-score");
     spanElement.textContent = computerScore;
 }
 
-setButtonEventListener();
 game();

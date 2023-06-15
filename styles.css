@@ -37,6 +37,7 @@ body {
 
 #play-again {
     display: none;
+    cursor: pointer;
     font-size: 50px;
     padding: 30px;
     border-radius: 14px;

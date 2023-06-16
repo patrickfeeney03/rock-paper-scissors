@@ -95,6 +95,22 @@ function runRound() {
     }
 }
 
+function toggleClass(elementId, className) {
+    let element = document.querySelector(elementId);
+    if (element.classList.contains(className)) {
+        element.classList.remove(className);
+    } else {
+        element.classList.add(className);
+    }
+}
+
+function removeClasses(elementId, arrayOfClassNames) {
+    let element = document.querySelector(elementId);
+    arrayOfClassNames.forEach((className) => {
+        element.classList.remove(className);
+    });
+}
+
 function showWinnerLooser() {
     let playerResultSpan = document.querySelector("#player-result");
     let computerResultSpan = document.querySelector("#computer-result");
@@ -104,14 +120,20 @@ function showWinnerLooser() {
         console.log("Game Result: Draw");
         playerResultSpan.textContent = "Draw";
         computerResultSpan.textContent = "Draw";
+        toggleClass("#square-container1", "yellow-background");
+        toggleClass("#square-container2", "yellow-background");
     } else if(playerWinsCount < computerWinsCount) {
         console.log("Game Result: Computer Wins");
         playerResultSpan.textContent = "Lost!";
         computerResultSpan.textContent = "Won!";
+        toggleClass("#square-container1", "red-background");
+        toggleClass("#square-container2", "green-background");
     } else if(playerWinsCount > computerWinsCount) {
         console.log("Game Result: Player Wins");
         playerResultSpan.textContent = "Won!";
         computerResultSpan.textContent = "Lost!";
+        toggleClass("#square-container1", "green-background");
+        toggleClass("#square-container2", "red-background");
     }
 }
 
@@ -153,7 +175,7 @@ function hideWinnerLooserResultTexts() {
 function toggleRockPaperScissorsImages() {
     let mainImages = document.querySelectorAll(".main-images");
     let displayTypeImage1 = window.getComputedStyle(mainImages[0]).getPropertyValue("display");
-    if (displayTypeImage1 === "inline") {
+    if (displayTypeImage1 === "inline" || displayTypeImage1 === "inline-block") {
         mainImages.forEach((image) => {
             image.style.display = "none";
         });
@@ -167,7 +189,7 @@ function toggleRockPaperScissorsImages() {
 function togglePlayAgainButton() {
     let playAgainButton = document.querySelector("#play-again");
     let displayType = window.getComputedStyle(playAgainButton).getPropertyValue("display");
-    if (displayType === "inline-block") {
+    if (displayType === "inline-block" || displayType === "inline") {
         playAgainButton.style.display = "none";
     } else {
         playAgainButton.style.display = "inline";
@@ -212,6 +234,8 @@ function gameSetup() {
     emptyChoiceSquares();
     setImagesClickEventListener();
     setPlayAgainButtonEventListener();
+    removeClasses("#square-container1", ["green-background", "yellow-background", "red-background"]);
+    removeClasses("#square-container2", ["green-background", "yellow-background", "red-background"]);
 }
 
 gameSetup();

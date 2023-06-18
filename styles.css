@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 /* * {
     border: 2px solid pink;
     //margin: 1px; 
@@ -5,10 +7,18 @@
 
 body {
     text-align: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F6F6EB;
+}
+
+p {
+    font-weight: 500;
+    font-size: 30px;
 }
 
 .title {
     font-size: 45px;
+    font-weight: 700;
     margin: 40px 4px 15px 4px;
 }
 
@@ -53,6 +63,20 @@ body {
     gap: 20px;
 }
 
+.side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choice-text {
+    margin: 10px auto 10px auto;
+}
+
+#round-p {
+    margin: 10px auto 30px auto;
+}
+
 .choice-container {
     border: solid black 3px;
     width: 200px;
@@ -60,15 +84,15 @@ body {
 }
 
 .green-background {
-    background-color: greenyellow;
+    background-color: #98D8AA;
 }
 
 .red-background  {
-    background-color: red;
+    background-color: #FF6D60;
 }
 
 .yellow-background {
-    background-color: yellow;
+    background-color: #F7D060;
 }
 
 .choice-images {
@@ -107,42 +131,42 @@ body {
 
 @keyframes myShadowGreen {
     0% {
-        box-shadow: 0 0 0px 0px greenyellow;
+        box-shadow: 0 0 0px 0px #98D8AA;
     }
 
     65% {
-        box-shadow: 0 0 13px 12px greenyellow;
+        box-shadow: 0 0 13px 12px #98D8AA;
     }
 
     100% {
-        box-shadow: 0 0 0px 0px greenyellow;
+        box-shadow: 0 0 0px 0px #98D8AA;
     }
 }
 
 @keyframes myShadowRed {
     0% {
-        box-shadow: 0 0 0px 0px red;
+        box-shadow: 0 0 0px 0px #FF6D60;
     }
 
     65% {
-        box-shadow: 0 0 13px 12px red;
+        box-shadow: 0 0 13px 12px #FF6D60;
     }
 
     100% {
-        box-shadow: 0 0 0px 0px red;
+        box-shadow: 0 0 0px 0px #FF6D60;
     }
 }
 
 @keyframes myShadowYellow {
     0% {
-        box-shadow: 0 0 0px 0px yellow;
+        box-shadow: 0 0 0px 0px #F7D060;
     }
 
     65% {
-        box-shadow: 0 0 13px 12px yellow;
+        box-shadow: 0 0 13px 12px #F7D060;
     }
 
     100% {
-        box-shadow: 0 0 0px 0px yellow;
+        box-shadow: 0 0 0px 0px #F7D060;
     }
 }

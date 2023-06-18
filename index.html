@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <div>
         <p class="title">Click one of the 3 images!</p>
     </div>
-
     <div class="images-container">
         <div>
             <img src="./images/rock.svg" class="main-images" id="rock">
@@ -28,15 +26,13 @@
             <button id="play-again">Play Again</button>
         </div>
     </div>
-
     <div>
         <p id="round-p">Round: <span id="round-count">1</span></p>
     </div>
-
     <div class="sides-container">
         <div class="side" id="left">
             <div class="player-names-container">
-                <p>Your Choice</p>
+                <p class="choice-text">Your Choice</p>
             </div>
             <div class="choice-container" id="square-container1">
                 <img src="./images/rock.svg" class="choice-images" id="img-sqr-1">
@@ -50,7 +46,7 @@
         </div>
         <div class="side" id="right">
             <div class="player-names-container">
-                <p>Computer's Choice</p>
+                <p class="choice-text">Computer's Choice</p>
             </div>
             <div class="choice-container" id="square-container2">
                 <img src="./images/rock.svg" class="choice-images" id="img-sqr-2">
@@ -62,10 +58,7 @@
                 <p id="computer-result">Won!</p>
             </div>
         </div>
-        
-        
-    </div>
-    
+    </div>    
 </body>
 <script src="./script.js" defer></script>
 </html>

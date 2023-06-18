@@ -89,10 +89,32 @@ function runRound() {
     if (roundCount > 4) {
         toggleRockPaperScissorsImages();
         togglePlayAgainButton();
-        showWinnerLooser();        
+        showWinnerLooser();
+
+        let lastElemLeft = document.querySelector("#img-sqr-1");
+        if (lastElemLeft.src.includes("rock")) {
+            changeSrc("#img-sqr-1", "./images/rockwhite.svg");
+        } else if (lastElemLeft.src.includes("paper")) {
+            changeSrc("#img-sqr-1", "./images/paperwhite.svg");
+        } else {
+            changeSrc("#img-sqr-1", "./images/scissorswhite.svg");
+        }
+        let lastElemRight = document.querySelector("#img-sqr-2");
+        if (lastElemRight.src.includes("rock")) {
+            changeSrc("#img-sqr-2", "./images/rockwhite.svg");
+        } else if (lastElemRight.src.includes("paper")) {
+            changeSrc("#img-sqr-2", "./images/paperwhite.svg");
+        } else {
+            changeSrc("#img-sqr-2", "./images/scissorswhite.svg");
+        }
     } else {
         updateRoundCounter(roundCount+1);
     }
+}
+
+function changeSrc(elementId, newSrc) {
+    let element = document.querySelector(elementId);
+    element.src = newSrc;
 }
 
 function toggleClass(elementId, className) {

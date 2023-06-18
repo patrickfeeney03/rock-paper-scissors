@@ -90,25 +90,21 @@ function runRound() {
         toggleRockPaperScissorsImages();
         togglePlayAgainButton();
         showWinnerLooser();
-
-        let lastElemLeft = document.querySelector("#img-sqr-1");
-        if (lastElemLeft.src.includes("rock")) {
-            changeSrc("#img-sqr-1", "./images/rockwhite.svg");
-        } else if (lastElemLeft.src.includes("paper")) {
-            changeSrc("#img-sqr-1", "./images/paperwhite.svg");
-        } else {
-            changeSrc("#img-sqr-1", "./images/scissorswhite.svg");
-        }
-        let lastElemRight = document.querySelector("#img-sqr-2");
-        if (lastElemRight.src.includes("rock")) {
-            changeSrc("#img-sqr-2", "./images/rockwhite.svg");
-        } else if (lastElemRight.src.includes("paper")) {
-            changeSrc("#img-sqr-2", "./images/paperwhite.svg");
-        } else {
-            changeSrc("#img-sqr-2", "./images/scissorswhite.svg");
-        }
+        changeImageChoosenToWhite("#img-sqr-1");
+        changeImageChoosenToWhite("#img-sqr-2");
     } else {
         updateRoundCounter(roundCount+1);
+    }
+}
+
+function changeImageChoosenToWhite(elementId) {
+    element = document.querySelector(elementId);
+    if (element.src.includes("rock")) {
+        changeSrc(elementId, "./images/rockwhite.svg");
+    } else if (element.src.includes("paper")) {
+        changeSrc(elementId, "./images/paperwhite.svg");
+    } else {
+        changeSrc(elementId, "./images/scissorswhite.svg");
     }
 }
 
@@ -211,7 +207,7 @@ function toggleRockPaperScissorsImages() {
 function togglePlayAgainButton() {
     let playAgainButton = document.querySelector("#play-again");
     let displayType = window.getComputedStyle(playAgainButton).getPropertyValue("display");
-    if (displayType === "inline-block" || displayType === "inline") {
+    if (displayType === "inline" || displayType === "inline-block") {
         playAgainButton.style.display = "none";
     } else {
         playAgainButton.style.display = "inline";
@@ -250,7 +246,10 @@ function gameSetup() {
     updateRoundCounter(roundCount+1);
     updatePlayerCounter(playerWinsCount);
     updateComputerCounter(computerWinsCount);
-    // Toggling works because the initial state of the images is none, so it gets set to inline.
+    // Toggling works because the initial state of the images is inverted.
+    // PlayAgainButton is set to inline, so this toggle sets it to none, the
+    // same logic is followed by the Rock, Paper, Scissors.
+    // I made it this way to write less code.
     togglePlayAgainButton();
     toggleRockPaperScissorsImages();
     emptyChoiceSquares();

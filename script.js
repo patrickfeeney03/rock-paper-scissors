@@ -86,7 +86,7 @@ function runRound() {
     }
     roundCount++;
     
-    if (roundCount > 4) {
+    if (playerWinsCount === 5 || computerWinsCount === 5) {
         toggleRockPaperScissorsImages();
         togglePlayAgainButton();
         showWinnerLooser();
